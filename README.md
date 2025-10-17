@@ -39,8 +39,3 @@ Cơ sở dữ liệu lựa chọn: (Mức dễ) Lưu trữ file .txt hoặc .csv
 
 ## Thuyết trình nhóm (5 người)
 
-## 📂 Cấu trúc thư mục
-Tham khảo trong dir `src/`, `data/`, `docs/`.
-
-## Cách chạy
-`se cap nhat`
