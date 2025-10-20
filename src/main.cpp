@@ -5,7 +5,11 @@ using namespace std;
 int main()
 {
     Movie m;
-    m.setMovie(01, "John Wick 4", "Action", 169);
+    m.addMovie();
     m.display();
+    m.writeFileEntry();
+
+    cout << "\nĐọc lại danh sách từ file:\n";
+    Movie::readFileEntry();
     return 0;
 }
