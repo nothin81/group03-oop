@@ -5,7 +5,6 @@ using namespace std;
 class Movie {
 private:
     int id;
-
     string title;
     int release_year;
     string genre;
@@ -13,8 +12,15 @@ private:
 
 public:
     Movie(); //constructor 
-    Movie(int id, string& title, const int release_year, const string& genre, int runtime);
-    ~Movie();
+    Movie(int id, string& title, int release_year, string& genre, int runtime)
+    {
+        id = -1;
+        title = "Unknown";
+        release_year = 2999;
+        genre = "Unknown, Unknown";
+        runtime = 0;
+    }
+
     void display();
 
     void setTitle(string title);
@@ -27,10 +33,9 @@ public:
     int getRuntime();
 
     void addMovie();
+    void readFileEntry();
+    void writeFileEntry();
 };
-
-Movie::Movie(int id, string& title, const int release_year, const string& genre, int runtime)
-    : id(id), title(title), release_year(release_year), genre(genre), runtime(runtime){}
 
 void Movie::setTitle(string title)
 {
@@ -64,12 +69,32 @@ int Movie::getRuntime()
 
 void Movie::addMovie()
 {
+    id++;
     cout << "Nhap vao ten phim: ";
-    std::getline 
+    getline(cin, title);
+    // cin.ignore();
+
+    cout << "\nNhap vao the loai phim: ";
+    getline(cin, genre);
+    // cin.ignore();
+
+    cout << "\nNhap vao thoi gian phim (m): ";
+    cin >> runtime;
+    cin.ignore();
+
+}
+
+void Movie::readFileEntry()
+{
+
+}
+
+void Movie::writeFileEntry()
+{
+    
 }
 
 void Movie::display()
 {
-    cout << "[" << id << "] " << name << " - " << genre
-         << " (" << duration << " minutes)" << endl;
+    cout << "[" << id << "] " << title << " - " << genre << " (" << runtime << " minutes)" << endl;
 }
