@@ -1,5 +1,5 @@
 #include <iostream>
-#include "movie.cpp"
+#include "movie.h"
 using namespace std;
 
 int main()
@@ -9,7 +9,7 @@ int main()
     m.display();
     m.writeFileEntry();
 
-    cout << "\nĐọc lại danh sách từ file:\n";
+    cout << "\nDoc File:\n";
     Movie::readFileEntry();
     return 0;
 }

@@ -2,52 +2,22 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include "movie.h"
 using namespace std;
 
-class Movie {
-private:
-    int id;
-    string title;
-    int release_year;
-    string genre;
-    int runtime;
+Movie::Movie()
+{
+    id = -1;
+    title = "Unknown";
+    release_year = 2077;
+    genre = "Unknown, Unknown";
+    runtime = 0;
+}
 
-public:
-    Movie(); //constructor 
-    // Movie(int id, string& title, int release_year, string& genre, int runtime)  //test default values
-    // {
-    //     id = -1;
-    //     title = "Unknown";
-    //     release_year = 2999;
-    //     genre = "Unknown, Unknown";
-    //     runtime = 0;
-    // }
-    Movie(int id, string& title, int release_year, string& genre, int runtime)
-    {
-        this->id = id;
-        this->title = title;
-        this->release_year = release_year;
-        this->genre = genre;
-        this->runtime = runtime;
-    }
-
-    ~Movie();
-
-    void display();
-
-    void setTitle(string title);
-    void setGenre(string genre);
-    void setRuntime(int runtime);
-
-    int getId();
-    string getTitle();
-    string getGenre();
-    int getRuntime();
-
-    void addMovie();
-    static void readFileEntry();   //k can obj;
-    void writeFileEntry();
-};
+int Movie::getId()
+{
+    return id;
+}
 
 void Movie::setTitle(string title)
 {
