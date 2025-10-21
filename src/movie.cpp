@@ -55,21 +55,22 @@ void Movie::addMovie()
     id = nextId++;
     cout << "Nhap vao ten phim: ";
     getline(cin, title);
-    // cin.ignore();
 
-    cout << "\nNhap vao the loai phim: ";
-    getline(cin, genre);
-    // cin.ignore();
-
-    cout << "\nNhap vao thoi gian phim (m): ";
-    cin >> runtime;
+    cout << "Nhap vao nam phat hanh: ";
+    cin >> release_year;
     cin.ignore();
 
+    cout << "Nhap vao the loai phim: ";
+    getline(cin, genre);
+
+    cout << "Nhap vao thoi gian phim (m): ";
+    cin >> runtime;
+    cin.ignore();
 }
 
 void Movie::readFileEntry()
 {
-    ifstream fm_in("../data/movies.txt");
+    ifstream fm_in("./movies.txt");
     if (!fm_in.is_open())
     {
         cout << "### Khong mo duoc file movies.txt! ###" << endl;
@@ -81,27 +82,30 @@ void Movie::readFileEntry()
     while (getline(fm_in, s_entry))
     {
         stringstream ss(s_entry);
-        string i_id, s_title, s_genre, i_runtime;
+        string i_id, s_title,i_release_year, s_genre, i_runtime;
 
         getline(ss, i_id, ';');
         getline(ss, s_title, ';');
+        getline(ss, i_release_year, ';');
         getline(ss, s_genre, ';');
-        getline(ss, i_runtime, ',');
+        getline(ss, i_runtime, ';');
 
         int id = stoi(i_id);    //str -> int
+        int release_year = stoi(i_release_year);        
         int runtime = stoi(i_runtime);
 
-        cout << "[" << i_id << "] " << s_title << " - " << s_genre << " (" << i_runtime << " minutes)" << endl;
+        cout << "[" << i_id << "] " << s_title << "(" << i_release_year << ")"
+            << " - " << s_genre << " (" << i_runtime << " minutes)" << endl;
     }
     fm_in.close();
 }
 
 void Movie::writeFileEntry()
 {
-    ofstream fm_out("movies.txt", ios::app);
+    ofstream fm_out("./movies.txt", ios::app);
     if (fm_out.is_open())
     {
-        fm_out << id << "," << title << "," << genre << "," << runtime << "\n";
+        fm_out << id << ";" << title << ";" << release_year << ";" << genre << ";" << runtime << "\n";
         fm_out.close();
     } else {
         cout << "### Khong mo duoc file movies.txt! ###" << endl;
