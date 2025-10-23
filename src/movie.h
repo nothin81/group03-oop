@@ -32,13 +32,15 @@ public:
     void display();
 
     void setTitle(string title);
+    void setReleaseYear(int release_year);
     void setGenre(string genre);
     void setRuntime(int runtime);
 
-    int getId();
-    string getTitle();
-    string getGenre();
-    int getRuntime();
+    int getId() const;
+    string getTitle() const;
+    int getReleaseYear() const;
+    string getGenre() const;
+    int getRuntime() const;
 
     void addMovie();
     static void readFileEntry();   //k can obj;

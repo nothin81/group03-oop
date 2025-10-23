@@ -14,19 +14,23 @@ Movie::Movie()
     runtime = 0;
 }
 
-int Movie::getId() {return id;}
+int Movie::getId() const {return id;}
 
 void Movie::setTitle(string title) {this->title = title;}
 
-string Movie::getTitle() {return title;}
+string Movie::getTitle() const {return title;}
+
+void Movie::setReleaseYear(int release_year) {this->release_year = release_year;}
+
+int Movie::getReleaseYear() const { return release_year;}
 
 void Movie::setGenre(string genre) {this->genre = genre;}
 
-string Movie::getGenre() { return genre;}
+string Movie::getGenre() const { return genre;}
 
 void Movie::setRuntime(int runtime) { this->runtime = runtime;}
 
-int Movie::getRuntime() { return runtime;}
+int Movie::getRuntime() const { return runtime;}
 
 void Movie::addMovie()
 {
