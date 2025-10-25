@@ -7,12 +7,14 @@
 
 using namespace std;
 
-Booking::Booking() {
+Booking::Booking()
+{
     seats.resize(TOTAL_SEATS, false);  // Initialize all seats as available
     status = "Available";
 }
 
-void Booking::createBooking() {
+void Booking::createBooking()
+{
     cout << "\n==== Tao Booking Moi! ====\n";
     cout << "Enter booking name: ";
     getline(cin, bookingName);
@@ -69,7 +71,8 @@ void Booking::createBooking() {
     }
 }
 
-void Booking::displayAvailableSeats() const {
+void Booking::displayAvailableSeats() const
+{
     cout << "\nAvailable Seats:\n";
     for (int i = 0; i < TOTAL_SEATS; i++) {
         if (!seats[i]) {
@@ -80,7 +83,8 @@ void Booking::displayAvailableSeats() const {
     cout << endl;
 }
 
-bool Booking::bookSeat(int seatNum) {
+bool Booking::bookSeat(int seatNum)
+{
     if (seatNum < 1 || seatNum > TOTAL_SEATS) {
         cout << "Invalid seat number!\n";
         return false;
@@ -106,7 +110,8 @@ void Booking::saveBooking() const
     }
 }
 
-void Booking::viewAllBookings() {
+void Booking::viewAllBookings()
+{
     ifstream bookingFile("./bookings.txt");
     string line;
     
@@ -130,7 +135,8 @@ void Booking::viewAllBookings() {
     bookingFile.close();
 }
 
-void Booking::displayBookingDetails() const {
+void Booking::displayBookingDetails() const
+{
     cout << "\n=== Xac Nhan Thong Tin ===\n"
          << "Name: " << bookingName << "\n"
          << "Movie: " << movie.getTitle() << "\n"

@@ -5,7 +5,8 @@
 #include <vector>
 #include <string>
 
-class Cinema {
+class Cinema
+{
 private:
     int id;
     std::string name;

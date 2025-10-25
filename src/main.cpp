@@ -3,20 +3,16 @@
 #include "booking.h"
 using namespace std;
 
-void intro()
+void displayHeader()
 {
-    cout << "=== UNG DUNG DAT PHIM ===\n";
-    cout << "";
-    cout << "";
-    cout << "";
-    cout << "";
-    cout << "";
-    
+    cout << "========================================\n"
+         << "          UNG DUNG DAT VE PHIM        \n"
+         << "========================================\n";
 }
 
 int main()
 {
-    intro();
+    displayHeader();
     Movie m;
     while(true)
     {

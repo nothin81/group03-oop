@@ -5,14 +5,16 @@
 
 using namespace std;
 
-Cinema::Cinema() {
+Cinema::Cinema()    //giong class movie
+{
     id = -1;
     name = "Unknown";
     address = "Unknown";
     screeningRoom = 0;
 }
 
-Cinema::Cinema(int id, string name, string address, int screeningRoom) {
+Cinema::Cinema(int id, string name, string address, int screeningRoom)
+{
     this->id = id;
     this->name = name;
     this->address = address;
@@ -31,7 +33,8 @@ void Cinema::setName(string name) { this->name = name; }
 void Cinema::setAddress(string address) { this->address = address; }
 void Cinema::setScreeningRoom(int screeningRoom) { this->screeningRoom = screeningRoom; }
 
-void Cinema::addCinema() {
+void Cinema::addCinema()
+{
     static int nextId = 0;
     id = nextId++;
     
@@ -46,13 +49,15 @@ void Cinema::addCinema() {
     cin.ignore();
 }
 
-void Cinema::display() const {
+void Cinema::display() const
+{
     cout << "[" << id << "] " << name 
          << "\nDia chi: " << address 
          << "\nSo phong chieu: " << screeningRoom << endl;
 }
 
-void Cinema::writeFileEntry() const {
+void Cinema::writeFileEntry() const
+{
     ofstream file("./cinemas.txt", ios::app);
     if (file.is_open()) {
         file << id << ";" << name << ";" << address << ";" << screeningRoom << "\n";
@@ -62,7 +67,8 @@ void Cinema::writeFileEntry() const {
     }
 }
 
-void Cinema::readFileEntry() {
+void Cinema::readFileEntry()
+{
     ifstream file("./cinemas.txt");
     if (!file.is_open()) {
         cout << "### Khong mo duoc file cinemas.txt! ###" << endl;

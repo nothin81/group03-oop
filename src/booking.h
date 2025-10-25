@@ -8,7 +8,8 @@
 
 using namespace std;
 
-class Booking {
+class Booking
+{
 private:
     string bookingName;
     Movie movie;
