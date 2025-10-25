@@ -66,9 +66,9 @@ void Movie::readFileEntry()
         getline(ss, s_genre, ';');
         getline(ss, i_runtime, ';');
 
-        int id = stoi(i_id);    //str -> int
-        int release_year = stoi(i_release_year);        
-        int runtime = stoi(i_runtime);
+        // int id = stoi(i_id);    //str -> int
+        // int release_year = stoi(i_release_year);        
+        // int runtime = stoi(i_runtime);
 
         cout << "[" << i_id << "] " << s_title << "(" << i_release_year << ")"
             << " - " << s_genre << " (" << i_runtime << " minutes)" << endl;
