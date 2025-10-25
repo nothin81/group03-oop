@@ -22,31 +22,28 @@ void displayMainMenu()
 
 void displayMovieMenu()
 {
-    cout << "\nMENU CHINH:\n"
-         << "\t1. Quan ly phim\n"
-         << "\t2. Quan ly rap\n"
-         << "\t3. Quan ly dat ve\n"
-         << "\t0. Thoat\n"
+    cout << "\nQUAN LY PHIM:\n"
+         << "\t1. Them vao phim moi\n"
+         << "\t2. Xem danh sach phim\n"
+         << "\t0. Quay lai\n"
          << "Lua chon cua ban: ";
 }
 
 void displayCinemaMenu()
 {
-    cout << "\nMENU CHINH:\n"
-         << "\t1. Quan ly phim\n"
-         << "\t2. Quan ly rap\n"
-         << "\t3. Quan ly dat ve\n"
-         << "\t0. Thoat\n"
+    cout << "\nQUAN LY RAP CHIEU:\n"
+         << "\t1. Them vao rap chieu moi\n"
+         << "\t2. Xem danh sach rap\n"
+         << "\t0. Quay lai\n"
          << "Lua chon cua ban: ";
 }
 
 void displayBookingMenu()
 {
-    cout << "\nMENU CHINH:\n"
-         << "\t1. Quan ly phim\n"
-         << "\t2. Quan ly rap\n"
-         << "\t3. Quan ly dat ve\n"
-         << "\t0. Thoat\n"
+    cout << "\nQUAN LY DAT VE:\n"
+         << "\t1. Dat ve moi\n"
+         << "\t2. Xem danh sach ve\n"
+         << "\t0. Quay lai\n"
          << "Lua chon cua ban: ";
 }
 
@@ -56,12 +53,10 @@ int main()
     Cinema cine;
     Booking booking;
     int choice;
-
-    displayHeader();
-    
+   
     while(true)
     {
-
+        
     }
     return 0;
 }
