@@ -5,6 +5,8 @@
 #include "movie.h"
 using namespace std;
 
+int Movie::currentId = 0;
+
 Movie::Movie()
 {
     id = -1;
@@ -25,10 +27,35 @@ void Movie::setReleaseYear(int release_year) {this->release_year = release_year;
 void Movie::setGenre(string genre) {this->genre = genre;}
 void Movie::setRuntime(int runtime) { this->runtime = runtime;}
 
+int Movie::readFile() {
+    ifstream fm_in("./data/movies.txt");
+    if (!fm_in.is_open()) {
+        return 0; // Tra ve 0 neu file k ton tai
+    }
+
+    string s_entry;
+    while (getline(fm_in, s_entry)) {
+        stringstream ss(s_entry);
+        string i_id;
+        getline(ss, i_id, ';');
+        try {
+            int id = stoi(i_id);
+            if (id > currentId) {
+                currentId = id;
+            }
+        } catch (...) {
+            continue;
+        }
+    }
+    fm_in.close();
+    return currentId;
+}
+
 void Movie::addMovie()
 {
-    static int nextId = 0;
-    id = nextId++;
+    currentId = readFile(); // Get last ID from file
+    id = ++currentId; // Increment and use next ID
+    
     cout << "Nhap vao ten phim: ";
     getline(cin, title);
 
@@ -44,7 +71,7 @@ void Movie::addMovie()
     cin.ignore();
 }
 
-void Movie::readFileEntry()
+void Movie::printData()
 {
     ifstream fm_in("./movies.txt");
     if (!fm_in.is_open())
@@ -58,7 +85,7 @@ void Movie::readFileEntry()
     while (getline(fm_in, s_entry))
     {
         stringstream ss(s_entry);
-        string i_id, s_title,i_release_year, s_genre, i_runtime;
+        string i_id, s_title, i_release_year, s_genre, i_runtime;
 
         getline(ss, i_id, ';');
         getline(ss, s_title, ';');
@@ -66,17 +93,13 @@ void Movie::readFileEntry()
         getline(ss, s_genre, ';');
         getline(ss, i_runtime, ';');
 
-        // int id = stoi(i_id);    //str -> int
-        // int release_year = stoi(i_release_year);        
-        // int runtime = stoi(i_runtime);
-
         cout << "[" << i_id << "] " << s_title << "(" << i_release_year << ")"
-            << " - " << s_genre << " (" << i_runtime << " minutes)" << endl;
+             << " - " << s_genre << " (" << i_runtime << " minutes)" << endl;
     }
     fm_in.close();
 }
 
-void Movie::writeFileEntry()
+void Movie::writeFile()
 {
     ofstream fm_out("./movies.txt", ios::app);
     if (fm_out.is_open())

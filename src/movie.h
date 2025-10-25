@@ -10,6 +10,7 @@ private:
     int release_year;
     string genre;
     int runtime;
+    static int currentId; // ID track khi load file
 
 public:
     Movie(); //constructor 
@@ -43,8 +44,9 @@ public:
     int getRuntime() const;
 
     void addMovie();
-    static void readFileEntry();   //k can obj;
-    void writeFileEntry();
+    static int readFile();
+    void writeFile();
+    static void printData();
 };
 
 #endif

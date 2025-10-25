@@ -42,10 +42,10 @@ int movieMenu()
         {
             case 1:
                 mov.addMovie();
-                mov.writeFileEntry();
+                mov.writeFile();
                 break;
             case 2:
-                Movie::readFileEntry();
+                Movie::readFile();
                 break;
         }
     } while (choice2 != 0);  //neu sai thi ve 0
@@ -72,10 +72,10 @@ int cinemaMenu()
         switch (choice2) {
             case 1:
                 cine.addCinema();
-                cine.writeFileEntry(); // bi trung lap ham nay
+                cine.writeFile(); // bi trung lap ham nay
                 break;
             case 2:
-                Cinema::readFileEntry();
+                Cinema::displayData();
                 break;
         }
     } while (choice2 != 0);
@@ -104,7 +104,7 @@ int bookingMenu()
                 bookings.createBooking();
                 break;
             case 2:
-                bookings.viewAllBookings();
+                bookings.printData();
                 break;
         
         }

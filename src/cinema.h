@@ -1,36 +1,37 @@
 #ifndef CINEMA_H
 #define CINEMA_H
 
-#include <iostream>
-#include <vector>
 #include <string>
+using std::string;
 
-class Cinema
-{
+class Cinema {
 private:
     int id;
-    std::string name;
-    std::string address;
+    string name;
+    string address;
     int screeningRoom;
+    static int currentId;  // ID track trong file
 
 public:
     Cinema();
-    Cinema(int id, std::string name, std::string address, int screeningRoom);
+    Cinema(int id, string name, string address, int screeningRoom);
     
     int getId() const;
-    std::string getName() const;
-    std::string getAddress() const;
+    string getName() const;
+    string getAddress() const;
     int getScreeningRoom() const;
     
     void setId(int id);
-    void setName(std::string name);
-    void setAddress(std::string address);
+    void setName(string name);
+    void setAddress(string address);
     void setScreeningRoom(int screeningRoom);
     
+    static int readFile();
+    static void displayData();
+    void writeFile() const;
+
     void addCinema();
     void display() const;
-    static void readFileEntry();
-    void writeFileEntry() const;
 };
 
 #endif

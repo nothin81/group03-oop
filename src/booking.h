@@ -6,25 +6,25 @@
 #include <string>
 #include "movie.h"
 
-using namespace std;
-
-class Booking
-{
+class Booking {
 private:
-    string bookingName;
+    int bookingId;
+    std::string bookingName;
     Movie movie;
     int seatNumber;
-    string status;       // con trong :"V" , da book : "K"
-    vector<bool> seats;  // true if seat is taken, false if available
-    const int TOTAL_SEATS = 50;  // Example total seats
+    std::string status;
+    std::vector<bool> seats;
+    static int currentId;
+    static const int TOTAL_SEATS = 50;
 
 public:
     Booking();
+    static int readFile();
     void createBooking();
     void displayAvailableSeats() const;
     bool bookSeat(int seatNum);
     void saveBooking() const;
-    static void viewAllBookings();
+    static void printData();
     void displayBookingDetails() const;
 };
 

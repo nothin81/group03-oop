@@ -7,21 +7,51 @@
 
 using namespace std;
 
+int Booking::currentId = 0;
+
 Booking::Booking()
 {
+    bookingId = -1;
     seats.resize(TOTAL_SEATS, false);  // Initialize all seats as available
     status = "Available";
 }
 
+int Booking::readFile() {
+    ifstream file("./data/bookings.txt");
+    if (!file.is_open()) {
+        return 0;   //tra 0 neu k ton tai file
+    }
+
+    string line;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string id;
+        getline(ss, id, ';');
+        try {
+            int currentId = stoi(id);
+            if (currentId > Booking::currentId) {
+                Booking::currentId = currentId;
+            }
+        } catch (...) {
+            continue;
+        }
+    }
+    file.close();
+    return Booking::currentId;
+}
+
 void Booking::createBooking()
 {
+    currentId = readFile();
+    bookingId = ++currentId;
+
     cout << "\n==== Tao Booking Moi! ====\n";
     cout << "Nhap vao ten dat cho (booking name): ";
     getline(cin, bookingName);
 
     // Display available movies
     cout << "\nPhim dang chieu:\n";
-    Movie::readFileEntry();
+    Movie::printData();     //static void
 
     cout << "\nNhap vao ID Phim can dat cho: ";
     int movieId;
@@ -29,10 +59,14 @@ void Booking::createBooking()
     cin.ignore();
 
     // Load movie tu file
-    ifstream movieFile("./movies.txt");
+    ifstream movieFile("./data/movies.txt");
+    if (!movieFile.is_open()) {
+        cout << "# Khong the mo file movies.txt\n";
+        return;
+    }
+
     string line;
     bool found = false;
-    
     while (getline(movieFile, line)) {
         stringstream ss(line);
         string id, title, year, genre, runtime;
@@ -54,13 +88,13 @@ void Booking::createBooking()
 
     if (!found)
     {
-        cout << "Movie not found!\n";
+        cout << "Khong tim thay phim!\n";
         return;
     }
 
     displayAvailableSeats();
     
-    cout << "Enter seat number (1-" << TOTAL_SEATS << "): ";
+    cout << "Nhap so ghe (1-" << TOTAL_SEATS << "): ";
     cin >> seatNumber;
     cin.ignore();
 
@@ -73,13 +107,15 @@ void Booking::createBooking()
 
 void Booking::displayAvailableSeats() const     //console mac dinh windows 120x30 
 {
-    cout << "\nSo do ghe trong:\n";
+    cout << "\nSo do cho ngoi:\n";
     for (int i = 0; i < TOTAL_SEATS; i++)
     {
         if (!seats[i]) {
-            cout << (i + 1) << "  ";
+            cout << (i + 1) << " ";
+        } else {
+            cout << "X ";
         }
-        if ((i + 1) % 10 == 0) cout << endl;
+        if ((i + 1) % 10 == 0) cout << "\n";
     }
     cout << endl;
 }
@@ -88,12 +124,12 @@ bool Booking::bookSeat(int seatNum)
 {
     if (seatNum < 1 || seatNum > TOTAL_SEATS)
     {
-        cout << "Ghe khong ton tai!\n";
+        cout << "So ghe khong hop le!\n";
         return false;
     }
     if (seats[seatNum - 1])
     {
-        cout << "Ghe khong trong!\n";
+        cout << "Ghe da duoc dat!\n";
         return false;
     }
     seats[seatNum - 1] = true;
@@ -102,48 +138,52 @@ bool Booking::bookSeat(int seatNum)
 
 void Booking::saveBooking() const
 {
-    ofstream bookingFile("./bookings.txt", ios::app);
-    if (bookingFile.is_open()) {
-        bookingFile << bookingName << ";"
-                   << movie.getId() << ";"
-                   << movie.getTitle() << ";"
-                   << seatNumber << ";"
-                   << status << "\n";
-        bookingFile.close();
+    ofstream file("./bookings.txt", ios::app);
+    if (file.is_open()) {
+        file << bookingId << ";"
+             << bookingName << ";"
+             << movie.getId() << ";"
+             << seatNumber << ";"
+             << status << "\n";
+        file.close();
     }
 }
 
-void Booking::viewAllBookings()
-{
-    ifstream bookingFile("./bookings.txt");
+void Booking::printData() {
+    ifstream file("./data/bookings.txt");
+    if (!file.is_open()) {
+        cout << "Khong the mo file bookings.txt\n";
+        return;
+    }
+
     string line;
-    
-    cout << "\n=== All Bookings ===\n";
-    while (getline(bookingFile, line)) {
+    cout << "\n=== Danh sach Booking ===\n";
+    while (getline(file, line)) {
         stringstream ss(line);
-        string name, movieId, title, seat, status;
+        string id, name, movieId, seat, status;
         
+        getline(ss, id, ';');
         getline(ss, name, ';');
         getline(ss, movieId, ';');
-        getline(ss, title, ';');
         getline(ss, seat, ';');
         getline(ss, status, ';');
         
-        cout << "Booking Name: " << name << "\n"
-             << "Movie: " << title << " (ID: " << movieId << ")\n"
-             << "Seat: " << seat << "\n"
-             << "Status: " << status << "\n"
-             << "-------------------\n";
+        cout << "Booking #" << id << "\n"
+                 << "Ten: " << name << "\n"
+                 << "Ma phim: " << movieId << "\n"
+                 << "Ghe: " << seat << "\n"
+                 << "Trang thai: " << status << "\n"
+                 << "-------------------\n";
     }
-    bookingFile.close();
+    file.close();
 }
 
 void Booking::displayBookingDetails() const
 {
-    cout << "\n=== Xac Nhan Thong Tin ===\n"
-         << "Name: " << bookingName << "\n"
-         << "Movie: " << movie.getTitle() << "\n"
-         << "Seat Number: " << seatNumber << "\n"
-         << "Status: " << status << "\n";
+    cout << "\n=== Chi tiet Booking ===\n"
+         << "Ma booking: " << bookingId << "\n"
+         << "Ten: " << bookingName << "\n"
+         << "Ghe: " << seatNumber << "\n"
+         << "Trang thai: " << status << "\n";
 }
 

@@ -5,7 +5,9 @@
 
 using namespace std;
 
-Cinema::Cinema()    //giong class movie
+int Cinema::currentId = 0;
+
+Cinema::Cinema()
 {
     id = -1;
     name = "Unknown";
@@ -21,22 +23,44 @@ Cinema::Cinema(int id, string name, string address, int screeningRoom)
     this->screeningRoom = screeningRoom;
 }
 
-// Getters
 int Cinema::getId() const { return id; }
 string Cinema::getName() const { return name; }
 string Cinema::getAddress() const { return address; }
 int Cinema::getScreeningRoom() const { return screeningRoom; }
 
-// Setters
 void Cinema::setId(int id) { this->id = id; }
 void Cinema::setName(string name) { this->name = name; }
 void Cinema::setAddress(string address) { this->address = address; }
 void Cinema::setScreeningRoom(int screeningRoom) { this->screeningRoom = screeningRoom; }
 
+int Cinema::readFile() {
+    ifstream file("./data/cinemas.txt");
+    if (!file.is_open()) {
+        return 0;  // tra ve 0 neu file k ton tai
+    }
+
+    string line;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string id_str;
+        getline(ss, id_str, ';');
+        try {
+            int id = stoi(id_str);
+            if (id > currentId) {
+                currentId = id;
+            }
+        } catch (...) {
+            continue;
+        }
+    }
+    file.close();
+    return currentId;
+}
+
 void Cinema::addCinema()
 {
-    static int nextId = 0;
-    id = nextId++;
+    currentId = readFile();  // lay id tu doc file
+    id = ++currentId;       // fix su dung
     
     cout << "Nhap ten rap: ";
     getline(cin, name);
@@ -49,16 +73,9 @@ void Cinema::addCinema()
     cin.ignore();
 }
 
-void Cinema::display() const
+void Cinema::writeFile() const
 {
-    cout << "[" << id << "] " << name 
-         << "\nDia chi: " << address 
-         << "\nSo phong chieu: " << screeningRoom << endl;
-}
-
-void Cinema::writeFileEntry() const
-{
-    ofstream file("./cinemas.txt", ios::app);
+    ofstream file("./data/cinemas.txt", ios::app);
     if (file.is_open()) {
         file << id << ";" << name << ";" << address << ";" << screeningRoom << "\n";
         file.close();
@@ -67,9 +84,8 @@ void Cinema::writeFileEntry() const
     }
 }
 
-void Cinema::readFileEntry()
-{
-    ifstream file("./cinemas.txt");
+void Cinema::displayData() {
+    ifstream file("./data/cinemas.txt");
     if (!file.is_open()) {
         cout << "### Khong mo duoc file cinemas.txt! ###" << endl;
         return;
