@@ -16,14 +16,14 @@ Booking::Booking()
 void Booking::createBooking()
 {
     cout << "\n==== Tao Booking Moi! ====\n";
-    cout << "Enter booking name: ";
+    cout << "Nhap vao ten dat cho (booking name): ";
     getline(cin, bookingName);
 
     // Display available movies
-    cout << "\nAvailable Movies:\n";
+    cout << "\nPhim dang chieu:\n";
     Movie::readFileEntry();
 
-    cout << "\nEnter movie ID to book: ";
+    cout << "\nNhap vao ID Phim can dat cho: ";
     int movieId;
     cin >> movieId;
     cin.ignore();
@@ -71,12 +71,13 @@ void Booking::createBooking()
     }
 }
 
-void Booking::displayAvailableSeats() const
+void Booking::displayAvailableSeats() const     //console mac dinh windows 120x30 
 {
-    cout << "\nAvailable Seats:\n";
-    for (int i = 0; i < TOTAL_SEATS; i++) {
+    cout << "\nSo do ghe trong:\n";
+    for (int i = 0; i < TOTAL_SEATS; i++)
+    {
         if (!seats[i]) {
-            cout << (i + 1) << " ";
+            cout << (i + 1) << "  ";
         }
         if ((i + 1) % 10 == 0) cout << endl;
     }
@@ -85,12 +86,14 @@ void Booking::displayAvailableSeats() const
 
 bool Booking::bookSeat(int seatNum)
 {
-    if (seatNum < 1 || seatNum > TOTAL_SEATS) {
-        cout << "Invalid seat number!\n";
+    if (seatNum < 1 || seatNum > TOTAL_SEATS)
+    {
+        cout << "Ghe khong ton tai!\n";
         return false;
     }
-    if (seats[seatNum - 1]) {
-        cout << "Seat already taken!\n";
+    if (seats[seatNum - 1])
+    {
+        cout << "Ghe khong trong!\n";
         return false;
     }
     seats[seatNum - 1] = true;
