@@ -22,8 +22,34 @@ void displayMainMenu()
 
 void displayMovieMenu()
 {
-
+    cout << "\nMENU CHINH:\n"
+         << "\t1. Quan ly phim\n"
+         << "\t2. Quan ly rap\n"
+         << "\t3. Quan ly dat ve\n"
+         << "\t0. Thoat\n"
+         << "Lua chon cua ban: ";
 }
+
+void displayCinemaMenu()
+{
+    cout << "\nMENU CHINH:\n"
+         << "\t1. Quan ly phim\n"
+         << "\t2. Quan ly rap\n"
+         << "\t3. Quan ly dat ve\n"
+         << "\t0. Thoat\n"
+         << "Lua chon cua ban: ";
+}
+
+void displayBookingMenu()
+{
+    cout << "\nMENU CHINH:\n"
+         << "\t1. Quan ly phim\n"
+         << "\t2. Quan ly rap\n"
+         << "\t3. Quan ly dat ve\n"
+         << "\t0. Thoat\n"
+         << "Lua chon cua ban: ";
+}
+
 int main()
 {   
     Movie mov;
@@ -35,6 +61,7 @@ int main()
     
     while(true)
     {
+
     }
     return 0;
 }
