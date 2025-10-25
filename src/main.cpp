@@ -75,7 +75,7 @@ int cinemaMenu()
                 cine.writeFileEntry(); // bi trung lap ham nay
                 break;
             case 2:
-                Movie::readFileEntry();
+                Cinema::readFileEntry();
                 break;
         }
     } while (choice2 != 0);
