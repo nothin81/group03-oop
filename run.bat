@@ -1,5 +1,6 @@
 @echo off
 setlocal
+cd /D "%~dp0"
 
 set "FILE1=data\movies.txt"
 set "FILE2=data\cinemas.txt"

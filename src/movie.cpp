@@ -5,7 +5,7 @@
 #include "movie.h"
 using namespace std;
 
-int Movie::currentId = 1;
+int Movie::currentId = 0;
 
 int Movie::getId() const {return id;}
 string Movie::getTitle() const {return title;}
@@ -22,7 +22,7 @@ int Movie::readFile()
 {
     ifstream movie_file("./data/movies.txt");
     if (!movie_file.is_open()) {
-        return 1; // Tra ve 1 neu file k ton tai
+        return 0; // Tra ve 0 neu file k ton tai
     }
 
     string movie_line;
