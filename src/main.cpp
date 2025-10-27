@@ -146,7 +146,6 @@ int main()
             default:
                 cout << "# Lua chon khong hop le!" << endl;
         }
-
     }
     return 0;
 }
