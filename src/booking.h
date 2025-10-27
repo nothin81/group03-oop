@@ -11,6 +11,7 @@ private:
     int bookingId;
     std::string bookingName;
     Movie movie;
+    int cinemaId;
     int seatNumber;
     std::string status;
     std::vector<bool> seats;

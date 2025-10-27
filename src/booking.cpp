@@ -4,6 +4,7 @@
 #include <sstream>
 #include "booking.h"
 #include "movie.h"
+#include "cinema.h"
 
 using namespace std;
 
@@ -17,27 +18,27 @@ Booking::Booking()
 }
 
 int Booking::readFile() {
-    ifstream file("./data/bookings.txt");
-    if (!file.is_open()) {
-        return 0;   //tra 0 neu k ton tai file
+    ifstream booking_file("./data/bookings.txt");
+    if (!booking_file.is_open()) {
+        return 1;   //tra 1 neu k ton tai file
     }
-
+    int t_id;
     string line;
-    while (getline(file, line)) {
+    while (getline(booking_file, line)) {
         stringstream ss(line);
         string id;
         getline(ss, id, ';');
         try {
-            int currentId = stoi(id);
-            if (currentId > Booking::currentId) {
-                Booking::currentId = currentId;
+            t_id = stoi(id);
+            if (t_id > currentId) {
+                currentId = t_id;
             }
         } catch (...) {
             continue;
         }
     }
-    file.close();
-    return Booking::currentId;
+    booking_file.close();
+    return currentId;   
 }
 
 void Booking::createBooking()
@@ -59,38 +60,45 @@ void Booking::createBooking()
     cin.ignore();
 
     // Load movie tu file
-    ifstream movieFile("./data/movies.txt");
-    if (!movieFile.is_open()) {
+    ifstream movie_file("./data/movies.txt");
+    if (!movie_file.is_open()) {
         cout << "# Khong the mo file movies.txt\n";
         return;
     }
 
     string line;
-    bool found = false;
-    while (getline(movieFile, line)) {
-        stringstream ss(line);
+    bool isfound = false;
+    while (getline(movie_file, line)) {
+        stringstream movie_ss(line);
         string id, title, year, genre, runtime;
         
-        getline(ss, id, ';');
-        getline(ss, title, ';');
-        getline(ss, year, ';');
-        getline(ss, genre, ';');
-        getline(ss, runtime, ';');
+        getline(movie_ss, id, ';');
+        getline(movie_ss, title, ';');
+        getline(movie_ss, year, ';');
+        getline(movie_ss, genre, ';');
+        getline(movie_ss, runtime, ';');
         
         if (stoi(id) == movieId)    //kiem tra 
         {
             movie = Movie(stoi(id), title, stoi(year), genre, stoi(runtime));
-            found = true;
+            isfound = true;
             break;
         }
     }
-    movieFile.close();
+    movie_file.close();
 
-    if (!found)
+    if (!isfound)
     {
         cout << "Khong tim thay phim!\n";
         return;
     }
+
+    cout << "\nDanh sach rap chieu:\n";
+    Cinema::showData();
+
+    cout << "\nNhap vao ID Rap: ";
+    cin >> cinemaId;
+    cin.ignore();
 
     displayAvailableSeats();
     
@@ -111,9 +119,9 @@ void Booking::displayAvailableSeats() const     //console mac dinh windows 120x3
     for (int i = 0; i < TOTAL_SEATS; i++)
     {
         if (!seats[i]) {
-            cout << (i + 1) << " ";
+            cout << " | " << (i + 1) << " | ";
         } else {
-            cout << "X ";
+            cout << " | X  |";
         }
         if ((i + 1) % 10 == 0) cout << "\n";
     }
@@ -138,44 +146,72 @@ bool Booking::bookSeat(int seatNum)
 
 void Booking::saveBooking() const
 {
-    ofstream file("./data/bookings.txt", ios::app);
-    if (file.is_open()) {
-        file << bookingId << ";"
+    ofstream booking_file("./data/bookings.txt", ios::app);
+    if (booking_file.is_open()) {
+        booking_file << bookingId << ";"
              << bookingName << ";"
              << movie.getId() << ";"
+             << cinemaId << ";"  // Add cinemaId de register cac cinema
              << seatNumber << ";"
              << status << "\n";
-        file.close();
+        booking_file.close();
     }
 }
 
-void Booking::printData() {
-    ifstream file("./data/bookings.txt");
-    if (!file.is_open()) {
+void Booking::printData()
+{
+    ifstream booking_file("./data/bookings.txt");
+    if (!booking_file.is_open()) {
         cout << "Khong the mo file bookings.txt\n";
         return;
     }
 
     string line;
     cout << "\n=== Danh sach Booking ===\n";
-    while (getline(file, line)) {
-        stringstream ss(line);
-        string id, name, movieId, seat, status;
+    while (getline(booking_file, line)) {
+        stringstream booking_ss(line);
+        string id, name, movieId, cinemaId, seat, status;
+
+        getline(booking_ss, id, ';');
+        getline(booking_ss, name, ';');
+        getline(booking_ss, movieId, ';');
+        getline(booking_ss, cinemaId, ';');
+        getline(booking_ss, seat, ';');
+        getline(booking_ss, status, ';');
+
+        ifstream cine_file("./data/cinemas.txt");
+        string cine_name = "Unknown";
+        string cine_addr = "Unknown";
         
-        getline(ss, id, ';');
-        getline(ss, name, ';');
-        getline(ss, movieId, ';');
-        getline(ss, seat, ';');
-        getline(ss, status, ';');
+        if (cine_file.is_open()) {
+            string cine_line;
+            while (getline(cine_file, cine_line)) {
+                stringstream cineStream(cine_line);
+                string cId, cName, cAddress, cRooms;    // bien tam thoi
+                
+                getline(cineStream, cId, ';');
+                getline(cineStream, cName, ';');
+                getline(cineStream, cAddress, ';');
+                
+                if (cId == cinemaId) {
+                    cine_name = cName;
+                    cine_addr = cAddress;
+                    break;
+                }
+            }
+            cine_file.close();
+        }
         
         cout << "Booking #" << id << "\n"
-                 << "Ten: " << name << "\n"
-                 << "Ma phim: " << movieId << "\n"
-                 << "Ghe: " << seat << "\n"
-                 << "Trang thai: " << status << "\n"
-                 << "-------------------\n";
+             << "Ten: " << name << "\n"
+             << "Ma phim: " << movieId << "\n"
+             << "Rap: " << cine_name << "\n"
+             << "Dia chi: " << cine_addr << "\n"
+             << "Ghe: " << seat << "\n"
+             << "Trang thai: " << status << "\n"
+             << "-------------------\n";
     }
-    file.close();
+    booking_file.close();
 }
 
 void Booking::displayBookingDetails() const

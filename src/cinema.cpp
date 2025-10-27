@@ -34,13 +34,13 @@ void Cinema::setAddress(string address) { this->address = address; }
 void Cinema::setScreeningRoom(int screeningRoom) { this->screeningRoom = screeningRoom; }
 
 int Cinema::readFile() {
-    ifstream file("./data/cinemas.txt");
-    if (!file.is_open()) {
+    ifstream cine_file("./data/cinemas.txt");
+    if (!cine_file.is_open()) {
         return 0;  // tra ve 0 neu file k ton tai
     }
 
     string line;
-    while (getline(file, line)) {
+    while (getline(cine_file, line)) {
         stringstream ss(line);
         string id_str;
         getline(ss, id_str, ';');
@@ -53,7 +53,7 @@ int Cinema::readFile() {
             continue;
         }
     }
-    file.close();
+    cine_file.close();
     return currentId;
 }
 
@@ -85,15 +85,15 @@ void Cinema::writeFile() const
 }
 
 void Cinema::showData() {
-    ifstream file("./data/cinemas.txt");
-    if (!file.is_open()) {
+    ifstream cine_file("./data/cinemas.txt");
+    if (!cine_file.is_open()) {
         cout << "### Khong mo duoc file cinemas.txt! ###" << endl;
         return;
     }
 
     string line;
     cout << "\n===== DANH SACH RAP =====\n";
-    while (getline(file, line)) {
+    while (getline(cine_file, line)) {
         stringstream ss(line);
         string id, name, address, room;
         
@@ -106,5 +106,5 @@ void Cinema::showData() {
              << "\nDia chi: " << address 
              << "\nSo phong chieu: " << room << "\n-------------------\n";
     }
-    file.close();
+    cine_file.close();
 }

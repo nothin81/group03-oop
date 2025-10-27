@@ -20,16 +20,16 @@ void Movie::setRuntime(int runtime) { this->runtime = runtime;}
 
 int Movie::readFile()
 {
-    ifstream fm_in("./data/movies.txt");
-    if (!fm_in.is_open()) {
+    ifstream movie_file("./data/movies.txt");
+    if (!movie_file.is_open()) {
         return 1; // Tra ve 1 neu file k ton tai
     }
 
-    string entry;
-    while (getline(fm_in, entry)) {
-        stringstream ss(entry);
+    string movie_line;
+    while (getline(movie_file, movie_line)) {
+        stringstream movie_ss(movie_line);
         string i_id;
-        getline(ss, i_id, ';');
+        getline(movie_ss, i_id, ';');
         try {
             int id = stoi(i_id);
             if (id > currentId) {
@@ -39,7 +39,7 @@ int Movie::readFile()
             continue;
         }
     }
-    fm_in.close();
+    movie_file.close();
     return currentId;
 }
 
@@ -103,7 +103,7 @@ void Movie::writeFile()
     }
 }
 
-void Movie::display()
+void Movie::display()   //khong dung
 {
     cout << "[" << id << "] " << title << " - " << genre << " (" << runtime << " minutes)" << endl;
 }
