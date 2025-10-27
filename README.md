@@ -13,13 +13,13 @@ Xây dựng chương trình đặt vé xem phim online cho phép người dùng:
 * Chạy trên môi trường console
 
 ## Cơ sở dữ liệu (lưu trữ & trích xuất)
-Cơ sở dữ liệu lựa chọn: data files (.txt)
+Cơ sở dữ liệu lựa chọn: text data (.txt)
 
 ## Thiết kế chương trình (tóm tắt lớp)
 | Lớp | Mô tả | Vai trò |
 |-------|-------|-------|
 | `Movie` | Thông tin phim | Quản lý danh sách phim |
-| `Cinema` | Phòng chiếu (có danh sách ghế) | Hiển thị và chọn ghế |
+| `Cinema` | Phòng chiếu (có danh sách ghế) | Hiển thị và quản lý rạp chiếu |
 | `Booking` | Đặt vé | Hiển thị và chọn ghế |
 
 ## Thành viên & phân công
