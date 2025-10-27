@@ -5,16 +5,7 @@
 #include "movie.h"
 using namespace std;
 
-int Movie::currentId = 0;
-
-Movie::Movie()
-{
-    id = -1;
-    title = "Unknown";
-    release_year = 2077;
-    genre = "Unknown, Unknown";
-    runtime = 0;
-}
+int Movie::currentId = 1;
 
 int Movie::getId() const {return id;}
 string Movie::getTitle() const {return title;}
@@ -27,15 +18,16 @@ void Movie::setReleaseYear(int release_year) {this->release_year = release_year;
 void Movie::setGenre(string genre) {this->genre = genre;}
 void Movie::setRuntime(int runtime) { this->runtime = runtime;}
 
-int Movie::readFile() {
+int Movie::readFile()
+{
     ifstream fm_in("./data/movies.txt");
     if (!fm_in.is_open()) {
-        return 0; // Tra ve 0 neu file k ton tai
+        return 1; // Tra ve 1 neu file k ton tai
     }
 
-    string s_entry;
-    while (getline(fm_in, s_entry)) {
-        stringstream ss(s_entry);
+    string entry;
+    while (getline(fm_in, entry)) {
+        stringstream ss(entry);
         string i_id;
         getline(ss, i_id, ';');
         try {
@@ -73,18 +65,18 @@ void Movie::addMovie()
 
 void Movie::printData()
 {
-    ifstream fm_in("./movies.txt");
+    ifstream fm_in("./data/movies.txt");
     if (!fm_in.is_open())
     {
         cout << "### Khong mo duoc file movies.txt! ###" << endl;
         return;
     }
 
-    string s_entry;
+    string entry;
     cout << "\n===== DANH SACH PHIM =====\n";
-    while (getline(fm_in, s_entry))
+    while (getline(fm_in, entry))
     {
-        stringstream ss(s_entry);
+        stringstream ss(entry);
         string i_id, s_title, i_release_year, s_genre, i_runtime;
 
         getline(ss, i_id, ';');
@@ -93,7 +85,7 @@ void Movie::printData()
         getline(ss, s_genre, ';');
         getline(ss, i_runtime, ';');
 
-        cout << "[" << i_id << "] " << s_title << "(" << i_release_year << ")"
+        cout << "[" << i_id << "] " << s_title << " (" << i_release_year << ")"
              << " - " << s_genre << " (" << i_runtime << " minutes)" << endl;
     }
     fm_in.close();
@@ -101,7 +93,7 @@ void Movie::printData()
 
 void Movie::writeFile()
 {
-    ofstream fm_out("./movies.txt", ios::app);
+    ofstream fm_out("./data/movies.txt", ios::app);
     if (fm_out.is_open())
     {
         fm_out << id << ";" << title << ";" << release_year << ";" << genre << ";" << runtime << "\n";

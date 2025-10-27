@@ -138,7 +138,7 @@ bool Booking::bookSeat(int seatNum)
 
 void Booking::saveBooking() const
 {
-    ofstream file("./bookings.txt", ios::app);
+    ofstream file("./data/bookings.txt", ios::app);
     if (file.is_open()) {
         file << bookingId << ";"
              << bookingName << ";"

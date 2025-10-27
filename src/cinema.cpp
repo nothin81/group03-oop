@@ -84,7 +84,7 @@ void Cinema::writeFile() const
     }
 }
 
-void Cinema::displayData() {
+void Cinema::showData() {
     ifstream file("./data/cinemas.txt");
     if (!file.is_open()) {
         cout << "### Khong mo duoc file cinemas.txt! ###" << endl;

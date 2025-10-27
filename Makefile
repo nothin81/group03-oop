@@ -10,7 +10,7 @@ CXXFLAGS := -std=c++11 -Wall -Wextra -I./src
 SRC_DIR := src
 BUILD_DIR := build
 BIN_DIR := build
-TARGET := $(BIN_DIR)/booking_app
+TARGET := $(BIN_DIR)/online-cinema-ticket
 
 # Find all .cpp files recursively
 SRC_FILES := $(shell find $(SRC_DIR) -name "*.cpp")

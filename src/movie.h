@@ -3,7 +3,8 @@
 #include <string>
 using std::string;
 
-class Movie {
+class Movie
+{
 private:
     int id;
     string title;
@@ -13,15 +14,14 @@ private:
     static int currentId; // ID track khi load file
 
 public:
-    Movie(); //constructor 
-    // Movie(int id, string& title, int release_year, string& genre, int runtime)  //test default values
-    // {
-    //     id = -1;
-    //     title = "Unknown";
-    //     release_year = 2999;
-    //     genre = "Unknown, Unknown";
-    //     runtime = 0;
-    // }
+    Movie()  //test default values
+    {
+        id = -1;
+        title = "Unknown";
+        release_year = 2999;
+        genre = "Unknown, Unknown";
+        runtime = 0;
+    }
     Movie(int id, string& title, int release_year, string& genre, int runtime)
     {
         this->id = id;

@@ -27,7 +27,7 @@ public:
     void setScreeningRoom(int screeningRoom);
     
     static int readFile();
-    static void displayData();
+    static void showData();
     void writeFile() const;
 
     void addCinema();

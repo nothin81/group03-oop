@@ -45,7 +45,7 @@ int movieMenu()
                 mov.writeFile();
                 break;
             case 2:
-                Movie::readFile();
+                Movie::printData();
                 break;
         }
     } while (choice2 != 0);  //neu sai thi ve 0
@@ -75,7 +75,7 @@ int cinemaMenu()
                 cine.writeFile(); // bi trung lap ham nay
                 break;
             case 2:
-                Cinema::displayData();
+                Cinema::showData();
                 break;
         }
     } while (choice2 != 0);
