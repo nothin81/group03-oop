@@ -10,6 +10,7 @@ echo Kiem tra va tao cac file du lieu can thiet...
 
 if not exist "%FILE1%" (
     echo Tao file moi: %FILE1%
+    mkdir data
     type nul > "%FILE1%"
 ) else (
     echo File da ton tai: %FILE1%

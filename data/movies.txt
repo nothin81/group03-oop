@@ -1,0 +1,7 @@
+1;John Wick 4;2023;Action, Thriller;169
+2;Pirates of the Caribbean: At World's End;2007;Epic, Adventure;169
+3;Chainsaw Man - THE MOVIE: REZE Arc;2025;Acion, Animation;100
+4;Top Gun: Maverick;2022;Action, Epic;130
+5;The Dark Knight;2008;Psychological Drama, Action;152
+6;Mua Do;2025;War Epic;124
+7;uaaa;20;aaa;189

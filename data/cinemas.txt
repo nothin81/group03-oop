@@ -1,0 +1,5 @@
+1;CGV Vincom Times City;B1, Vincom Mega Mall Times City, 458 Minh Khai, Hai Ba Trung, Tp. Ha Noi;8
+2;Beta Thanh Xuan;B1, Golden West Tower, Le Van Thiem, Thanh Xuan, Tp. Ha Noi;6
+3;Trung Tam Chieu Phim Quoc Gia;87 Lang Ha, Cho Dua,Tp. Ha Noi;14
+4;CGV Vincom Royal City;B2, Vincom Royal City, 72A Nguyen Trai, Q. Thanh Xuan, Tp. Ha Noi;10
+5;CGV Vincom Landmark 81;B1, Vincom Center Landmark 81, 722 Dien Bien Phu, P. 22, Q. Binh Thanh, Tp. Ho Chi Minh;9
